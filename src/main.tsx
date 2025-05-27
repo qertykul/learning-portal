@@ -6,12 +6,10 @@ import { store } from './features/store'
 import './index.css'
 import App from './App'
 
-const basePath = import.meta.env.BASE_URL;
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <HashRouter basename={basePath}>
+      <HashRouter>
         <App />
       </HashRouter>
     </Provider>
