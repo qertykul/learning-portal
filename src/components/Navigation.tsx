@@ -18,19 +18,13 @@ import {
   School as SchoolIcon,
 } from '@mui/icons-material';
 import type { RootState } from '../features/store';
-
-interface UserState {
-  username: string;
-  level: number;
-  experience: number;
-  isAuthenticated: boolean;
-}
+import type { UserState } from '../features/userSlice';
 
 const Navigation: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const user = useSelector((state: RootState) => state.user as UserState);
+  const user = useSelector((state: RootState) => state.user);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -44,6 +38,8 @@ const Navigation: React.FC = () => {
     navigate(path);
     handleClose();
   };
+
+  const isAuthenticated = user.id !== undefined;
 
   return (
     <AppBar position="static">
@@ -64,7 +60,7 @@ const Navigation: React.FC = () => {
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {user.isAuthenticated ? (
+          {isAuthenticated ? (
             <>
               <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
                 <Typography variant="body2" sx={{ mr: 1 }}>
@@ -73,7 +69,7 @@ const Navigation: React.FC = () => {
                 <Box sx={{ width: 100 }}>
                   <LinearProgress
                     variant="determinate"
-                    value={(user.experience % 1000) / 10}
+                    value={(user.experience % 100) / 1}
                     sx={{ height: 8, borderRadius: 4 }}
                   />
                 </Box>
@@ -120,7 +116,10 @@ const Navigation: React.FC = () => {
                 <MenuItem onClick={() => handleNavigate('/settings')}>
                   Настройки
                 </MenuItem>
-                <MenuItem onClick={() => handleNavigate('/logout')}>
+                <MenuItem onClick={() => {
+                  handleClose();
+                  navigate('/login');
+                }}>
                   Выйти
                 </MenuItem>
               </Menu>

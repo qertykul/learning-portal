@@ -9,6 +9,8 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Courses = React.lazy(() => import('./pages/Courses'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 const CourseDetail = React.lazy(() => import('./pages/CourseDetail'));
+const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Suspense>
     </ThemeProvider>
