@@ -13,8 +13,6 @@ const Login = React.lazy(() => import('./pages/Login'));
 const Register = React.lazy(() => import('./pages/Register'));
 
 function App() {
-  const basePath = import.meta.env.BASE_URL;
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -25,13 +23,13 @@ function App() {
         </Container>
       }>
         <Routes>
-          <Route path={`${basePath}`} element={<Dashboard />} />
-          <Route path={`${basePath}courses`} element={<Courses />} />
-          <Route path={`${basePath}courses/:id`} element={<CourseDetail />} />
-          <Route path={`${basePath}profile`} element={<Profile />} />
-          <Route path={`${basePath}login`} element={<Login />} />
-          <Route path={`${basePath}register`} element={<Register />} />
-          <Route path="*" element={<Navigate to={basePath} replace />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:id" element={<CourseDetail />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     </ThemeProvider>
