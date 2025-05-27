@@ -17,6 +17,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleNavigate = (path: string) => {
+    const trimmedPath = path.replace(/^\//, '');
+    navigate(trimmedPath ? `/${trimmedPath}` : '/');
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // В реальном приложении здесь был бы запрос к API
@@ -28,7 +33,7 @@ const Login = () => {
       experience: 0,
       achievements: []
     }));
-    navigate('/courses');
+    handleNavigate('/courses');
   };
 
   return (
@@ -74,7 +79,7 @@ const Login = () => {
             <Button
               fullWidth
               variant="text"
-              onClick={() => navigate('/register')}
+              onClick={() => handleNavigate('/register')}
             >
               Нет аккаунта? Зарегистрируйтесь
             </Button>

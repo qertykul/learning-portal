@@ -19,6 +19,11 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const handleNavigate = (path: string) => {
+    const trimmedPath = path.replace(/^\//, '');
+    navigate(trimmedPath ? `/${trimmedPath}` : '/');
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -34,7 +39,7 @@ const Register = () => {
       experience: 0,
       achievements: []
     }));
-    navigate('/courses');
+    handleNavigate('/courses');
   };
 
   return (
@@ -101,7 +106,7 @@ const Register = () => {
             <Button
               fullWidth
               variant="text"
-              onClick={() => navigate('/login')}
+              onClick={() => handleNavigate('/login')}
             >
               Уже есть аккаунт? Войдите
             </Button>

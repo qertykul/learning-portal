@@ -16,6 +16,11 @@ import {
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const basePath = import.meta.env.BASE_URL;
+
+  const handleNavigate = (path: string) => {
+    navigate(basePath + path.replace(/^\//, ''));
+  };
 
   const features = [
     {
@@ -47,7 +52,7 @@ const Dashboard = () => {
         <Button
           variant="contained"
           size="large"
-          onClick={() => navigate('/courses')}
+          onClick={() => handleNavigate('/courses')}
           sx={{ mt: 4 }}
         >
           Начать обучение

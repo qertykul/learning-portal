@@ -18,7 +18,6 @@ import {
   School as SchoolIcon,
 } from '@mui/icons-material';
 import type { RootState } from '../features/store';
-import type { UserState } from '../features/userSlice';
 
 const Navigation: React.FC = () => {
   const navigate = useNavigate();
@@ -39,8 +38,6 @@ const Navigation: React.FC = () => {
     handleClose();
   };
 
-  const isAuthenticated = user.id !== undefined;
-
   return (
     <AppBar position="static">
       <Toolbar>
@@ -60,7 +57,7 @@ const Navigation: React.FC = () => {
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {isAuthenticated ? (
+          {user && user.id ? (
             <>
               <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
                 <Typography variant="body2" sx={{ mr: 1 }}>
@@ -69,7 +66,7 @@ const Navigation: React.FC = () => {
                 <Box sx={{ width: 100 }}>
                   <LinearProgress
                     variant="determinate"
-                    value={(user.experience % 100) / 1}
+                    value={(user.experience % 100)}
                     sx={{ height: 8, borderRadius: 4 }}
                   />
                 </Box>
@@ -92,7 +89,7 @@ const Navigation: React.FC = () => {
                 color="inherit"
               >
                 <Avatar sx={{ width: 32, height: 32 }}>
-                  {user.username[0]?.toUpperCase()}
+                  {user.username?.[0]?.toUpperCase()}
                 </Avatar>
               </IconButton>
               <Menu
@@ -116,10 +113,7 @@ const Navigation: React.FC = () => {
                 <MenuItem onClick={() => handleNavigate('/settings')}>
                   Настройки
                 </MenuItem>
-                <MenuItem onClick={() => {
-                  handleClose();
-                  navigate('/login');
-                }}>
+                <MenuItem onClick={() => handleNavigate('/login')}>
                   Выйти
                 </MenuItem>
               </Menu>
